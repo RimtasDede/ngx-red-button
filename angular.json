@@ -3,5 +3,37 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-  }
+    "red-button": {
+      "projectType": "library",
+      "root": "projects/red-button",
+      "sourceRoot": "projects/red-button/src",
+      "prefix": "lib",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:ng-packagr",
+          "options": {
+            "project": "projects/red-button/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "projects/red-button/tsconfig.lib.prod.json"
+            },
+            "development": {
+              "tsConfig": "projects/red-button/tsconfig.lib.json"
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/red-button/src/test.ts",
+            "tsConfig": "projects/red-button/tsconfig.spec.json",
+            "karmaConfig": "projects/red-button/karma.conf.js"
+          }
+        }
+      }
+    }
+  },
+  "defaultProject": "red-button"
 }
