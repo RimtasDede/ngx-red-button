@@ -3,12 +3,16 @@ import { Component, OnInit } from '@angular/core';
 @Component({
   selector: 'lib-red-button',
   template: `
-    <p>
-      red-button works!
-    </p>
+    <button class="red-button">
+      <ng-content></ng-content>
+    </button>
   `,
-  styles: [
-  ]
+  styles: [`
+    .red-button {
+      background: red;
+      color: white;
+    }
+  `]
 })
 export class RedButtonComponent implements OnInit {
 
