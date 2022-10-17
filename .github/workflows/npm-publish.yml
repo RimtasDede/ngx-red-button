@@ -19,7 +19,7 @@ jobs:
           node-version: 16
       - run: npm ci
       - run: npm run test:prod
-      - run: npm build red-button
+      - run: npm run build red-button
 
   publish-npm:
     needs: build
