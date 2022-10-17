@@ -7,6 +7,7 @@ on:
   push:
     branches:
       - main
+    path: 'projects/red-button'
 
 jobs:
   build:
@@ -18,6 +19,7 @@ jobs:
           node-version: 16
       - run: npm ci
       - run: npm run test:prod
+      - run: npm build red-button
 
   publish-npm:
     needs: build
@@ -27,8 +29,9 @@ jobs:
       - uses: actions/setup-node@v3
         with:
           node-version: 16
-          registry-url: https://registry.npmjs.org/
+          #registry-url: https://registry.npmjs.org/
       - run: npm ci
+      - run: cd dist/red-button
       - run: npm publish
         env:
-          NODE_AUTH_TOKEN: ${{secrets.NPM_TOKEN}}
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}

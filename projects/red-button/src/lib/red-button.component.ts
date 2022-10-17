@@ -3,7 +3,7 @@ import { Component, OnInit } from '@angular/core';
 @Component({
   selector: 'lib-red-button',
   template: `
-    <button class="red-button">
+    <button class="red-button" data="v0.0.2">
       <ng-content></ng-content>
     </button>
   `,
