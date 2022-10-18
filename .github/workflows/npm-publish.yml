@@ -1,40 +1,52 @@
-# This workflow will run tests using node and then publish a package to GitHub Packages when a release is created
-# For more information see: https://help.github.com/actions/language-and-framework-guides/publishing-nodejs-packages
-
 name: Publish to NPM
 
 on:
   push:
     branches:
       - main
-    path: 'projects/red-button'
+    paths:
+      - 'projects/red-button'
 
 jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Install node
       - uses: actions/setup-node@v3
         with:
           node-version: 16
-      - run: npm ci
-      - run: npm run test:prod
-      - run: npm run build red-button
-      - run: ls -la
 
-  publish-npm:
+      - name: Instal dependencies
+        run: npm ci
+
+      - name: Run tests
+        run: npm run test:prod
+
+      - name: Build package
+        run: npm run build red-button
+
+  publish-to-npm:
     needs: build
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
-      - uses: actions/setup-node@v3
-        with:
-          node-version: 16
-          #registry-url: https://registry.npmjs.org/
-      - run: npm ci
-      - run: ls -la
+      # - uses: actions/checkout@v3
 
-      - name: Publish
+      # - name: Install node
+      #   uses: actions/setup-node@v3
+      #   with:
+      #     node-version: 16
+      # - run: npm ci
+
+      - name: Download build
+        uses: actions/download-artifact@master
+        with:
+          name: dist
+          path: dist
+
+      - name: Publish to NPM
         working-directory: ./dist/red-button
         run: npm publish
         env:
