@@ -27,6 +27,12 @@ jobs:
       - name: Build package
         run: npm run build red-button
 
+      - name: Archive build
+        uses: actions/upload-artifact@v3
+        with:
+          name: dist
+          path: dist
+
   publish-to-npm:
     needs: build
     runs-on: ubuntu-latest
