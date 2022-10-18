@@ -20,6 +20,7 @@ jobs:
       - run: npm ci
       - run: npm run test:prod
       - run: npm run build red-button
+      - run: ls -la
 
   publish-npm:
     needs: build
