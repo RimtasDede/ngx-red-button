@@ -31,6 +31,8 @@ jobs:
           node-version: 16
           #registry-url: https://registry.npmjs.org/
       - run: npm ci
+      - run: ls -la
+
       - name: Publish
         working-directory: ./dist/red-button
         run: npm publish
