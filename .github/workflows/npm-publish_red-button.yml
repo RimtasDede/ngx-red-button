@@ -6,6 +6,6 @@ on:
 
 jobs:
   call-workflow-passing-data:
-    uses: ./.github/workflows/npm-publish.yml@main
+    uses: ./.github/workflows/npm-publish.yml@v1
     with:
       library: red-button
