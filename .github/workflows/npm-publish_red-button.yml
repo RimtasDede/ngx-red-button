@@ -1,0 +1,11 @@
+on:
+  push:
+    branches:
+      - main
+    # path: 'projects/${{ inputs.library }}'
+
+jobs:
+  call-workflow-passing-data:
+    uses: ./npm-publish.yml
+    with:
+      library: red-button

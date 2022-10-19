@@ -1,10 +1,11 @@
 name: Publish to NPM
 
 on:
-  push:
-    branches:
-      - main
-    path: 'projects/red-button'
+  workflow_call:
+    inputs:
+      library:
+        required: true
+        type: string
 
 jobs:
   build:
@@ -25,7 +26,7 @@ jobs:
         run: npm run test:prod
 
       - name: Build package
-        run: npm run build red-button
+        run: npm run build ${{ inputs.library }}
 
       - name: Archive build
         uses: actions/upload-artifact@v3
@@ -44,7 +45,6 @@ jobs:
         with:
           node-version: 16
           registry-url: https://registry.npmjs.org/
-      # - run: npm ci
 
       - name: Download build
         uses: actions/download-artifact@v3
@@ -53,7 +53,7 @@ jobs:
           path: dist
 
       - name: Publish to NPM
-        working-directory: ./dist/red-button
+        working-directory: ./dist/${{ inputs.library }}
         run: npm publish
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
