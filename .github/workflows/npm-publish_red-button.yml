@@ -1,3 +1,5 @@
+name: Publish red-button
+
 on:
   workflow_dispatch:
   push:
