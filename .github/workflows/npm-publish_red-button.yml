@@ -5,7 +5,8 @@ on:
     # path: 'projects/${{ inputs.library }}'
 
 jobs:
-  call-workflow-passing-data:
+  red-button:
     uses: ./.github/workflows/npm-publish.yml
     with:
       library: red-button
+    secrets: inherit
